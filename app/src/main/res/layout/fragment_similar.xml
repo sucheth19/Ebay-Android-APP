@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/product_list_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
+    <!-- Spinner layout remains unchanged -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp">
+
+        <Spinner
+            android:id="@+id/similar_content"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginRight="30dp" />
+
+        <Spinner
+            android:id="@+id/similar_sort"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" />
+    </LinearLayout>
+
+    <!-- CardView for product details -->
+
+    <!-- RecyclerView remains unchanged -->
+
+</LinearLayout>
+</ScrollView>
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+android:id="@+id/fab"
+android:layout_width="140dp"
+android:layout_height="140dp"
+android:layout_alignParentEnd="true"
+android:layout_alignParentBottom="true"
+android:layout_margin="16dp"
+android:foreground="@drawable/ic_launcher_wishlist_float"
+android:src="@drawable/ic_launcher_wishlist_float"
+android:visibility="visible"
+app:fabSize="normal"
+app:backgroundTint="#FF9800" />
+    </RelativeLayout>

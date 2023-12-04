@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShippingFragment">
+
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:src="@drawable/truck_delivery" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="0dp"
+            android:paddingLeft="10dp"
+            android:text="Sold By"
+            android:textColor="#090909"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/storename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Store Name"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/storeUrl"
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:paddingLeft="50dp"
+            android:text=""
+            android:textColor="#090909"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="false"
+        android:layout_marginTop="110dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/feedbackscore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Feedback Score"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="297dp"
+            android:layout_height="match_parent"
+            android:paddingLeft="50dp"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="140dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/popularity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Popularity"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/popularityscore"
+            android:layout_width="303dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="50dp"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="410dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="160dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/feedbackstar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Feedback Star"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="50dp"
+            android:src="@drawable/star_circle"
+           />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="200dp"
+        android:background="@color/gray" />
+
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="220dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/shipping"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:src="@drawable/ferry" />
+
+        <TextView
+            android:id="@+id/shippingInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="0dp"
+            android:paddingLeft="10dp"
+            android:text="Shipping Info"
+            android:textColor="#090909"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="260dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/shippingCost"
+            android:layout_width="141dp"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:text="Shipping Cost"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/shippingCostTextView"
+            android:layout_width="269dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="50dp"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="290dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/globalshipping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Global Shipping"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/globalShippingInfo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="50dp"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="320dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/handlingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Handling Time"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/handlingTimeInfo"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="50dp"
+            android:textColor="#090909" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="360dp"
+        android:layout_marginEnd="-2dp"
+        android:background="@color/gray" />
+
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="400dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/returnPolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:src="@drawable/dump_truck" />
+
+        <TextView
+            android:id="@+id/retutnPolcytext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="0dp"
+            android:paddingLeft="10dp"
+            android:text="Return Policy"
+            android:textColor="#090909"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="450dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Policy"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/policyInfo"
+            android:layout_width="359dp"
+            android:layout_height="match_parent"
+            android:paddingLeft="120dp"
+            android:textColor="#090909" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="470dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/returnsWithin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Returns Within"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/returnsWithinText"
+            android:layout_width="309dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="70dp"
+            android:textColor="#090909"
+            tools:ignore="DuplicateIds" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="500dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/refundmodes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Returns Mode"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/refundMode"
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textColor="#090909" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="530dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/shippedBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Shipped By"
+            android:textColor="#090909"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/shippedSeller"
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="90dp"
+            android:textColor="#090909" />
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:foreground="@drawable/ic_launcher_wishlist_float"
+        android:src="@drawable/ic_launcher_wishlist_float"
+        android:visibility="visible"
+        app:fabSize="normal"
+        app:backgroundTint="#FF9800" />
+</RelativeLayout>

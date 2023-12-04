@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context="ProductFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context="ProductFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/imageRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:scrollbars="horizontal"
+            android:scaleType="centerCrop"
+            app:layoutManager="LinearLayoutManager" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/productTitle"
+        android:layout_width="match_parent"
+        android:layout_height="49dp" />
+
+    <TextView
+        android:id="@+id/priceShipping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/gray" />
+
+    <TextView
+        android:id="@+id/highlight"
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:text="Highlights" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/priceText"
+            android:layout_width="178dp"
+            android:layout_height="29dp"
+            android:text="price" />
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="178dp"
+            android:layout_height="29dp"
+            android:text="price" />
+
+        <!-- Add two new TextView elements here -->
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/brandName"
+            android:layout_width="179dp"
+            android:layout_height="29dp"
+            android:text="brand" />
+
+        <TextView
+            android:id="@+id/brand"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/gray" />
+    <TextView
+        android:id="@+id/Specifications"
+        android:layout_width="wrap_content"
+        android:layout_height="29dp"
+        android:text="Specifications" />
+    <LinearLayout
+        android:id="@+id/specificationsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- This LinearLayout will contain dynamically added TextViews -->
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab"-->
+<!--        android:layout_width="140dp"-->
+<!--        android:layout_height="140dp"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:foreground="@drawable/ic_launcher_wishlist_float"-->
+<!--        android:src="@drawable/ic_launcher_wishlist_float"-->
+<!--        android:visibility="visible"-->
+<!--        app:fabSize="normal"-->
+<!--        app:backgroundTint="#FF9800" />-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:foreground="@drawable/ic_launcher_wishlist_float"
+        android:src="@drawable/ic_launcher_wishlist_float"
+        android:visibility="visible"
+        app:fabSize="normal"
+        app:backgroundTint="#FF9800" />
+</RelativeLayout>
