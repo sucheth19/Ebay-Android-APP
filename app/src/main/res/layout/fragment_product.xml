@@ -22,36 +22,46 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/imageRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="328dp"
             android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:scrollbars="horizontal"
-            android:scaleType="centerCrop"
             app:layoutManager="LinearLayoutManager" />
 
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/productTitle"
-        android:layout_width="match_parent"
-        android:layout_height="49dp" />
+        <TextView
+            android:id="@+id/productTitle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="18dp"
+            android:textColor="#807A7A"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/priceShipping"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/priceShipping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#783DE1"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_marginTop="20dp"
-        android:background="@color/gray" />
+        android:background="#8E8E8E"
+        />
 
     <TextView
         android:id="@+id/highlight"
         android:layout_width="match_parent"
         android:layout_height="29dp"
+        android:textStyle="bold"
+        android:textColor="#807A7A"
         android:text="Highlights" />
 
     <LinearLayout
@@ -61,13 +71,15 @@
         <TextView
             android:id="@+id/priceText"
             android:layout_width="178dp"
+            android:textColor="#807A7A"
             android:layout_height="29dp"
             android:text="price" />
         <TextView
             android:id="@+id/price"
             android:layout_width="178dp"
+            android:textColor="#807A7A"
             android:layout_height="29dp"
-            android:text="price" />
+           />
 
         <!-- Add two new TextView elements here -->
 
@@ -81,12 +93,14 @@
         <TextView
             android:id="@+id/brandName"
             android:layout_width="179dp"
+            android:textColor="#807A7A"
             android:layout_height="29dp"
             android:text="brand" />
 
         <TextView
             android:id="@+id/brand"
             android:layout_width="wrap_content"
+            android:textColor="#807A7A"
             android:layout_height="29dp" />
 
     </LinearLayout>
@@ -94,13 +108,14 @@
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/gray" />
+        android:layout_height="1dp"
+        android:background="#8E8E8E"/>
     <TextView
         android:id="@+id/Specifications"
         android:layout_width="wrap_content"
         android:layout_height="29dp"
+        android:textStyle="bold"
+        android:textColor="#807A7A"
         android:text="Specifications" />
     <LinearLayout
         android:id="@+id/specificationsContainer"
@@ -112,28 +127,20 @@
 
 </LinearLayout>
 </ScrollView>
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab"-->
-<!--        android:layout_width="140dp"-->
-<!--        android:layout_height="140dp"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_margin="16dp"-->
-<!--        android:foreground="@drawable/ic_launcher_wishlist_float"-->
-<!--        android:src="@drawable/ic_launcher_wishlist_float"-->
-<!--        android:visibility="visible"-->
-<!--        app:fabSize="normal"-->
-<!--        app:backgroundTint="#FF9800" />-->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+    <ImageButton
         android:id="@+id/fab"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:foreground="@drawable/ic_launcher_wishlist_float"
-        android:src="@drawable/ic_launcher_wishlist_float"
-        android:visibility="visible"
-        app:fabSize="normal"
-        app:backgroundTint="#FF9800" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/circle_background"
+        android:scaleType="centerInside"
+        android:src="@drawable/cart_plus"
+        android:visibility="visible" />
 </RelativeLayout>

@@ -6,12 +6,11 @@
     <uses-permission android:name="ANDROID.PERMISSION.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission
-        android:name="android.permission.ACCESS_FINE_LOCATION"
-        />
+        android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <meta-data
         android:name="com.facebook.sdk.ApplicationId"
         android:value="@string/facebook_app_id" />
-
 
     <application
         android:allowBackup="true"
@@ -22,42 +21,47 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.EbayHw4"
-        android:background="#6C27B0"
+        android:background="#673AB7"
         tools:targetApi="31">
 
         <activity
             android:name=".itemDetailsSplash"
             android:exported="false" />
+
         <activity
             android:name=".LoadScreen"
-            android:exported="false" /> <!-- Launcher Activity -->
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" />
 
-                <category android:name="android.intent.category.LAUNCHER"
-                    android:background="#800080"
-                    />
-            </intent-filter>
-        </activity> <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
-            android:exported="false" /> <!-- SearchResults Activity -->
+            android:exported="false"
+            android:background="#673AB7"
+            />
+
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" android:background="#673AB7" />
+                <category android:name="android.intent.category.LAUNCHER"  android:background="#673AB7"/>
+            </intent-filter>
+        </activity> <!-- Main Activity -->
+
+        <!-- SearchResults Activity -->
         <activity
             android:name=".SearchResults"
             android:exported="false"
-            android:parentActivityName=".SearchFragment">
+            android:parentActivityName=".SearchFragment"/>
 
-            <!-- Other activity configurations for SearchResults -->
-        </activity> <!-- SearchFragment Activity -->
+        <!-- SearchFragment Activity -->
         <activity
             android:name=".SearchFragment"
             android:exported="false">
-
             <!-- Other activity configurations for SearchFragment -->
-        </activity> <!-- WishList Activity -->
+        </activity>
+
+        <!-- WishList Activity -->
         <activity
             android:name=".WishList"
             android:exported="false" />

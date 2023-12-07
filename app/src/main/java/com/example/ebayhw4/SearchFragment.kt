@@ -27,6 +27,7 @@ import android.widget.RadioButton
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
@@ -62,6 +63,7 @@ class ApiCallTask(private val listener: ApiCallListener) : AsyncTask<String, Voi
             val bufferedReader = BufferedReader(InputStreamReader(connection.inputStream))
             apiResult = bufferedReader.use { it.readText() }
         } catch (e: Exception) {
+            Log.d("errorclick7","click")
             e.printStackTrace()
         }
 
@@ -120,7 +122,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Find the Spinner in the layout
-        spinner = view.findViewById(R.id.spinner)
+
+         spinner = view.findViewById(R.id.spinner)
         val radioButtonCurrentLocation =
             view.findViewById<RadioButton>(R.id.radioButtonCurrentLocation)
         val radioButtonZipCode = view.findViewById<RadioButton>(R.id.radioButton3)
@@ -193,6 +196,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             val keyword = editTextKeyword?.text.toString().trim()
             val currentRadioButton = view?.findViewById<RadioButton>(R.id.radioButtonCurrentLocation)
             val zipRadioButton = view?.findViewById<RadioButton>(R.id.radioButton3)
+
 
             val zip = editTextZipCode?.text.toString().trim()
             // Check if either keyword or zip code is empty
@@ -269,6 +273,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
                     }
                 } catch (e: IOException) {
+                    Log.d("errorclick8","click")
                     e.printStackTrace()
                 }
                 // Remove updates only when necessary
@@ -294,6 +299,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 locationListener
             )
         } catch (e: SecurityException) {
+            Log.d("errorclick9","click")
             e.printStackTrace()
         }
     }
@@ -366,12 +372,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 Log.e("SearchResults", "SearchParameters object is null")
             }
         } catch (e: Exception) {
+            Log.d("errorclick10","click")
             Log.e("SearchResults", "Error updating UI", e)
         }
     }
 
     private fun onSearchButtonClick(keyword: String) {
+
         try {
+            Log.d("tryclick","click")
             val editTextKeyword = view?.findViewById<EditText>(R.id.editTextText)
             val keyword = editTextKeyword?.text.toString().trim()
             val spinner = view?.findViewById<Spinner>(R.id.spinner)
@@ -432,6 +441,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             startActivity(splashIntent)
 
         } catch (e: Exception) {
+            Log.d("errorclick","click")
             Log.e("SearchFragment", "Error during search button click", e)
         }
     }
@@ -446,6 +456,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         listener.onApiCallComplete(result)
                     }
                 } catch (e: Exception) {
+                    Log.d("errorclick2","click")
                     e.printStackTrace()
                 }
             }
@@ -477,6 +488,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
 
         } catch (e: IOException) {
+            Log.d("errorclick5","click")
             e.printStackTrace()
             ""
         }
@@ -525,11 +537,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun makeZipCodeRequest(zipCode: String, autoCompleteTextView: AutoCompleteTextView) {
         val url = "https://web-tech-hw-3.wl.r.appspot.com/zip-suggestions?zipCode=$zipCode"
-
         val stringRequest = StringRequest(
             Request.Method.GET, url,
             Response.Listener<String> { response ->
                 // Parse the JSON object
+                view?.findViewById<LinearLayout>(R.id.linearLayout2)?.visibility = View.GONE
+                view?.findViewById<CardView>(R.id.wishlistCardView)?.visibility = View.GONE
+
+                view?.findViewById<TextView>(R.id.noItemsTextView)?.visibility = View.GONE
+
                 val zipCodeList = mutableListOf<String>()
                 try {
                     // Parse the response and extract ZIP codes
@@ -541,7 +557,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     }
 
                 } catch (e: JSONException) {
+                    Log.d("errorclick6","click")
                     e.printStackTrace()
+
                 }
                 // Extract the "postalCodes" array
 
@@ -556,6 +574,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             },
             Response.ErrorListener { error ->
                 Log.e("Volley", "Error: $error")
+
             }
         )
         Volley.newRequestQueue(requireContext()).add(stringRequest)

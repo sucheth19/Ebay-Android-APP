@@ -11,16 +11,19 @@
         android:layout_height="match_parent"
         android:padding="8dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/fab"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:foreground="@drawable/ic_launcher_wishlist_float"
-        android:src="@drawable/ic_launcher_wishlist_float"
-        android:visibility="visible"
-        app:fabSize="normal"
-        app:backgroundTint="#FF9800" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/circle_background"
+        android:scaleType="centerInside"
+        android:src="@drawable/cart_plus"
+        android:visibility="visible" />
 </RelativeLayout>

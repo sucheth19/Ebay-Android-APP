@@ -44,22 +44,7 @@ class LoadScreen : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-//    private fun navigateUpToMain() {
-//        // Create an Intent to navigate up to the parent activity (SearchFragment)
-//        val upIntent = NavUtils.getParentActivityIntent(this)
-//
-//        // If upIntent is not null and the activity is not in the back stack, create a new task
-//        if (upIntent != null && NavUtils.shouldUpRecreateTask(this, upIntent)) {
-//            TaskStackBuilder.create(this)
-//                .addNextIntentWithParentStack(upIntent)
-//                .startActivities()
-//        } else {
-//            // If the activity is in the back stack, simply navigate up
-//            if (upIntent != null) {
-//                NavUtils.navigateUpTo(this, upIntent)
-//            }
-//        }
-//    }
+
 private fun navigateUpToSearchResults() {
     // Create an Intent to navigate up to the SearchResults activity
     val searchResultsIntent = Intent(this, MainActivity::class.java)

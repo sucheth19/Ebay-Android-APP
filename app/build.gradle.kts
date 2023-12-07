@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.ir.backend.js.compile
 import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
@@ -57,7 +58,7 @@ dependencies {
 //    implementation('com.facebook.android:facebook-share:[latest_version]')
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-
+    implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("com.squareup.okhttp3:okhttp:3.8.1")
     implementation("androidx.appcompat:appcompat:1.3.0")
     implementation("com.android.volley:volley:1.2.0")
@@ -69,6 +70,7 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-splashscreen:1.0.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")

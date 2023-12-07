@@ -1,12 +1,14 @@
 package com.example.ebayhw4
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
@@ -41,9 +43,18 @@ class WishlistAdapter(private val wishlistItems: MutableList<WishlistItem>) :
             removeButton.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val removedItem = wishlistItems[position]
-                    removeItem(position)
-                    removeItemFromWishlistApiCall(itemView.context, removedItem)
+                    val removedItem = wishlistItems.getOrNull(position)
+                    if (removedItem != null) {
+                        removeItem(position)
+                        Toast.makeText(
+                            itemView.context,
+                            "${removedItem.title} was removed from the wishlist",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        removeItemFromWishlistApiCall(itemView.context, removedItem)
+                    } else {
+                        Log.e("WishlistAdapter", "Invalid position: $position")
+                    }
                 }
             }
         }
@@ -69,9 +80,12 @@ class WishlistAdapter(private val wishlistItems: MutableList<WishlistItem>) :
         return wishlistItems.size
     }
     private fun removeItem(position: Int) {
-        val updatedList = wishlistItems.toMutableList()
-        updatedList.removeAt(position)
-        notifyItemRemoved(position)
+        if (position in 0 until wishlistItems.size) {
+            val removedItem = wishlistItems[position]
+            wishlistItems.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, wishlistItems.size)
+        }
     }
 
 }

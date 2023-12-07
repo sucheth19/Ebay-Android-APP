@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,17 +17,21 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.ebayhw4.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.ebayhw4.SearchResultItem
+import com.example.ebayhw4.WishlistManager
 
 
 class PhotosFragment : Fragment() {
     private var title: String? = null
     private lateinit var requestQueue: RequestQueue
+    private lateinit var wishlistButton: ImageButton
+    private lateinit var product: SearchResultItem
     companion object {
-        fun newInstance(title: String): PhotosFragment {
+        fun newInstance(title: String, product: SearchResultItem?): PhotosFragment {
             val fragment = PhotosFragment()
             val args = Bundle()
             args.putString("title",title)
+            args.putParcelable("product", product)
             fragment.arguments = args
             return fragment
         }
@@ -34,6 +39,7 @@ class PhotosFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         title = arguments?.getString("title")
+        product = arguments?.getParcelable("product")!!
             requestQueue = Volley.newRequestQueue(requireContext())
             fetchPhotos()
     }
@@ -45,12 +51,40 @@ class PhotosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_photos, container, false)
-        return view
+        wishlistButton = view.findViewById(R.id.fab)
+        wishlistButton.setOnClickListener {
+            toggleWishlistItem()
+        }
+       return view
     }
 
+    private fun updateWishlistButtonBackground(isInWishlist: Boolean) {
+        // Update the background of the button based on the wishlist status
+        val drawableResource =
+            if (isInWishlist) R.drawable.cart_remove else R.drawable.cart_plus
+        wishlistButton.setImageResource(drawableResource)
 
+    }
+    private fun toggleWishlistItem() {
+        val isInWishlist = WishlistManager.isItemInWishlist(product)
+
+        if (isInWishlist) {
+            WishlistManager.removeFromWishlistInApi(requireContext(), product.itemId)
+            Toast.makeText(requireContext(), "${product.title} was removed from the wishlist",Toast.LENGTH_SHORT
+            ).show()
+            updateWishlistButtonBackground(WishlistManager.isItemInWishlist(product))
+
+        } else {
+            WishlistManager.addItemToWishlist(product)
+            Toast.makeText(requireContext(), "${product.title} was added to the wishlist",Toast.LENGTH_SHORT
+            ).show()
+            updateWishlistButtonBackground(WishlistManager.isItemInWishlist(product))
+        }
+        updateWishlistButtonBackground(WishlistManager.isItemInWishlist(product))
+    }
     private fun fetchPhotos() {
         val apiUrl = "https://web-tech-hw-3.wl.r.appspot.com/photo?title=$title"
+        Log.d("apiUrl",apiUrl)
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, apiUrl, null,
             Response.Listener { response ->
@@ -110,13 +144,11 @@ class PhotosFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Find the FAB by its ID
-        val fab = view.findViewById<FloatingActionButton>(R.id.fab)
+        val fab = view.findViewById<ImageButton>(R.id.fab)
 
         // Set a click listener for the FAB
         fab.setOnClickListener {
-            // Perform your desired action when the FAB is clicked
-            // For example, you can show a toast message
-            Toast.makeText(requireContext(), "FAB Clicked!", Toast.LENGTH_SHORT).show()
+           toggleWishlistItem()
         }
     }
 }

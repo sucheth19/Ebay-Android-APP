@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="#673AB7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,14 +31,14 @@
         <!-- ImageButton for Facebook icon -->
         <ImageButton
             android:id="@+id/facebookButton"
-            android:layout_width="wrap_content"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/facebook"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Facebook"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_marginEnd="16dp"
+            android:background="#673AB7"
+            android:contentDescription="Facebook"
+            android:src="@mipmap/facebook"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.appcompat.widget.Toolbar>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -47,7 +47,7 @@
         android:layout_below="@+id/toolbar"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:background="@color/tabBackground"
+        android:background="#673AB7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -69,9 +69,9 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
-        android:layout_width="207dp"
-        android:layout_height="238dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="125dp"
+        android:layout_height="101dp"
+        android:layout_marginTop="212dp"
         android:progressTint="#673AB7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,11 +80,12 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="335dp"
-        android:layout_height="150dp"
+        android:layout_width="323dp"
+        android:layout_height="40dp"
         android:layout_marginTop="32dp"
         android:gravity="center_horizontal"
         android:text="TextView"
+        android:textColor="#673AB7"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"

@@ -13,54 +13,56 @@ class WishListFragment : Fragment(R.layout.fragment_wishlist) {
     private lateinit var wishlistRecyclerView: RecyclerView
     private lateinit var noItemsTextView: TextView
     private lateinit var wishlistCardView: androidx.cardview.widget.CardView
-    private lateinit var layoutNoCard: LinearLayout
     private lateinit var wishlistAdapter: WishlistAdapter
     private lateinit var itemCountTextView: TextView
     private lateinit var totalTextView: TextView
+    private lateinit var linearLayout2: LinearLayout
+    override fun onResume() {
+        super.onResume()
+        // Fetch the latest wishlist items when the fragment is resumed
+        WishlistManager.getAllWishlistItemsFromApi()
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         WishlistManager.init(requireContext())
         wishlistRecyclerView = view.findViewById(R.id.wishlistRecyclerView)
         noItemsTextView = view.findViewById(R.id.noItemsTextView)
         wishlistCardView = view.findViewById(R.id.wishlistCardView)
-        layoutNoCard = view.findViewById<LinearLayout>(R.id.linearLayout2)
         itemCountTextView = view.findViewById(R.id.itemCount)
         totalTextView = view.findViewById(R.id.total)
+        linearLayout2 = view.findViewById(R.id.linearLayout2)
         // Observe changes in wishlistLiveData
         WishlistManager.wishlistLiveData.observe(viewLifecycleOwner, Observer { wishlistItems ->
             updateUI(wishlistItems)
         })
-
         val layoutManager = GridLayoutManager(context, 2)
         wishlistRecyclerView.layoutManager = layoutManager
 
         // Initialize the wishlistAdapter only once
         wishlistAdapter = WishlistAdapter(ArrayList(WishlistManager.getWishlist())) // Convert to mutable list
         wishlistRecyclerView.adapter = wishlistAdapter
-
         WishlistManager.getAllWishlistItemsFromApi()
     }
 
 
     private fun updateUI(wishlistItems: List<WishlistItem>?) {
-        if (wishlistItems != null && wishlistItems.isNotEmpty()) {
-            wishlistCardView.visibility = View.VISIBLE
+        if (wishlistItems?.size!! > 0) {
+            linearLayout2.visibility = View.GONE
+            wishlistCardView.visibility = View.GONE
             noItemsTextView.visibility = View.GONE
-            layoutNoCard.visibility = View.GONE
-            itemCountTextView.visibility = View.VISIBLE
             totalTextView.visibility = View.VISIBLE
-            // Set the adapter for the RecyclerView
+            itemCountTextView.visibility = View.VISIBLE
             wishlistAdapter.updateItems(wishlistItems) // Add this line
             val totalCount = wishlistItems.size
             val totalPrice = calculateTotalPrice(wishlistItems)
             itemCountTextView.text = "WishList Total($totalCount items)"
             totalTextView.text = "$$totalPrice"
         } else {
+            linearLayout2.visibility = View.VISIBLE
             wishlistCardView.visibility = View.VISIBLE
             noItemsTextView.visibility = View.VISIBLE
-            layoutNoCard.visibility = View.VISIBLE
-            itemCountTextView.visibility = View.GONE
             totalTextView.visibility = View.GONE
+            itemCountTextView.visibility = View.GONE
         }
     }
     private fun calculateTotalPrice(wishlistItems: List<WishlistItem>): Double {

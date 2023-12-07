@@ -31,29 +31,30 @@ object WishlistManager {
 
     fun init(context: Context) {
         requestQueue = Volley.newRequestQueue(context.applicationContext)
+
+        getAllWishlistItemsFromApi()
     }
 
     fun addItemToWishlist(searchResultItem: SearchResultItem) {
-        try {
-            val shippingInfoList = JSONObject(mapOf("shippingCondition" to searchResultItem.shippingCondition))
-            val wishlistItem = WishlistItem(
-                itemId = searchResultItem.itemId,
-                title = searchResultItem.title,
-                galleryUrl = searchResultItem.galleryUrl,
-                price = searchResultItem.price,
-                shippingPrice = searchResultItem.shippingPrice,
-                zipCode = searchResultItem.zipCode,
-                shippingInfo = shippingInfoList,
-                returnsAccepted = true
-            )
-            addToWishlistApiCall(wishlistItem)
-
-            // Add the new item to the local wishlist
-            wishlist.add(wishlistItem)
-            wishlistLiveData.postValue(wishlist)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-            // Handle the JSONException, maybe log an error or show a message
+        if (!isItemInWishlist(searchResultItem)) {
+            try {
+                val shippingInfoList = JSONObject(mapOf("shippingCondition" to searchResultItem.shippingCondition))
+                val wishlistItem = WishlistItem(
+                    itemId = searchResultItem.itemId,
+                    title = searchResultItem.title,
+                    galleryUrl = searchResultItem.galleryUrl,
+                    price = searchResultItem.price,
+                    shippingPrice = searchResultItem.shippingPrice,
+                    zipCode = searchResultItem.zipCode,
+                    shippingInfo = shippingInfoList,
+                    returnsAccepted = true
+                )
+                addToWishlistApiCall(wishlistItem)
+                wishlist.add(wishlistItem)
+                wishlistLiveData.postValue(wishlist)
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
         }
     }
     private fun addToWishlistApiCall( wishlistItem: WishlistItem) {
@@ -71,21 +72,21 @@ object WishlistManager {
                 Log.e("Push error", error.toString())
             }
         )
-        Log.d("jsonObjectRequest",jsonObjectRequest.toString())
-        // Add the request to the RequestQueue
+
         requestQueue?.add(jsonObjectRequest)
+        getAllWishlistItemsFromApi()
     }
 
     fun getAllWishlistItemsFromApi() {
         val apiUrl = "https://web-tech-hw-3.wl.r.appspot.com/all-products"
-        Log.d("api",apiUrl)
         val jsonObjectRequest = JsonArrayRequest(
             Request.Method.GET,
             apiUrl,
             null,
             { response ->
-                Log.d("response", response.toString())
+
                 val wishlistItems = parseWishlistItems(response)
+                Log.d("live data",wishlistItems.toString())
                 wishlistLiveData.postValue(wishlistItems)
             },
             { error ->
@@ -97,6 +98,7 @@ object WishlistManager {
         // Add the request to the RequestQueue
         requestQueue?.add(jsonObjectRequest)
     }
+
     fun parseWishlistItems(response: JSONArray): List<WishlistItem> {
         val wishlistItems = mutableListOf<WishlistItem>()
 
@@ -133,22 +135,20 @@ object WishlistManager {
         return wishlist
     }
     fun removeWishlistItem(context: Context, item: WishlistItem) {
-        // Remove the item from the local wishlist
         removeItemFromWishlist(item)
-
-        // Make a network call to your MongoDB API to remove the item
         removeFromWishlistInApi(context, item.itemId)
     }
 
-    private fun removeItemFromWishlist(item: WishlistItem) {
+    fun removeItemFromWishlist(item: WishlistItem) {
         wishlist.remove(item)
         wishlistLiveData.postValue(wishlist)
     }
-
-    private fun removeFromWishlistInApi(context: Context, itemId: String) {
+    fun isItemInWishlist(searchResultItem: SearchResultItem?): Boolean {
+        return searchResultItem != null && wishlist.any { it.itemId == searchResultItem.itemId }
+    }
+     fun removeFromWishlistInApi(context: Context, itemId: String) {
         // Instantiate the RequestQueue
         val requestQueue: RequestQueue = Volley.newRequestQueue(context)
-
         // Formulate the request URL
         val url = "https://web-tech-hw-3.wl.r.appspot.com/products/$itemId"
 

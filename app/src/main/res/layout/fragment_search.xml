@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="414dp"
+        android:layout_width="400dp"
         android:layout_height="17dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="1dp"
         android:text="Keyword"
+        android:textColor="#8A8686"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextText"
-        android:layout_width="369dp"
-        android:layout_height="48dp"
+        android:layout_width="393dp"
+        android:layout_height="41dp"
         android:ems="10"
+        android:layout_marginTop="10dp"
         android:hint="Enter Keyword"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +38,7 @@
         android:layout_width="367dp"
         android:layout_height="29dp"
         android:text="Category"
+        android:textColor="#8A8686"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,19 +49,21 @@
         android:layout_width="366dp"
         android:layout_height="48dp"
         app:layout_constraintTop_toBottomOf="@+id/category"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-1dp" />
 
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="356dp"
         android:layout_height="25dp"
+        android:layout_marginStart="10dp"
+        android:paddingLeft="10dp"
         android:text="Please enter mandatory field"
         android:textColor="#FF0000"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText"
-        tools:layout_editor_absoluteX="-1dp"
         android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -62,6 +72,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="4dp"
         android:text="Condition"
+        android:textColor="#8A8686"
         app:layout_constraintTop_toBottomOf="@+id/spinner"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />
@@ -78,8 +89,9 @@
 
     <CheckBox
         android:id="@+id/checkBox8"
-        android:layout_width="107dp"
-        android:layout_height="49dp"
+        android:layout_width="85dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
         android:text="Used"
         app:layout_constraintStart_toEndOf="@+id/checkBox7"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -88,6 +100,7 @@
         android:id="@+id/checkBox9"
         android:layout_width="112dp"
         android:layout_height="48dp"
+        android:layout_marginTop="4dp"
         android:text="Unspecified"
         app:layout_constraintStart_toEndOf="@+id/checkBox8"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -98,6 +111,7 @@
         android:layout_height="21dp"
         android:layout_marginStart="4dp"
         android:text="Shipping Options"
+        android:textColor="#8A8686"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
 
@@ -112,8 +126,8 @@
 
     <CheckBox
         android:id="@+id/checkBox11"
-        android:layout_width="160dp"
-        android:layout_height="48dp"
+        android:layout_width="136dp"
+        android:layout_height="46dp"
         android:layout_marginTop="12dp"
         android:text="Local Pickup"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
@@ -122,48 +136,49 @@
 
     <CheckBox
         android:id="@+id/checkBox13"
-        android:layout_width="54dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="-5dp"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/checkBox11" />
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="171dp"
-        android:layout_height="43dp"
+        android:layout_width="141dp"
+        android:layout_height="20dp"
         android:layout_marginTop="4dp"
         android:text="Enable Nearby Search"
+        android:textColor="#8A8686"
         app:layout_constraintTop_toBottomOf="@+id/checkBox11"
-        tools:layout_editor_absoluteX="3dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="3dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/clearButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FFA500"
-        android:backgroundTint="#FF9800"
-        android:backgroundTintMode="add"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:background="#FF5733"
         android:onClick="onCleaSButtonClick"
         android:text="Clear"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.678"
+        app:layout_constraintHorizontal_bias="0.833"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myLinearLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/myLinearLayout" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:background="#FFA500"
-        android:backgroundTint="#FF9800"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:background="#FF5733"
         android:onClick="onSearchButtonClick"
+        android:layout_marginTop="30dp"
         android:text="Search"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintHorizontal_bias="0.173"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myLinearLayout" />
 
@@ -172,11 +187,10 @@
         android:layout_width="421dp"
         android:layout_height="203dp"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="1dp"
-        android:visibility="gone"
-        >
+        tools:layout_editor_absoluteX="1dp">
 
         <!-- Your existing views inside the LinearLayout -->
 
@@ -184,19 +198,15 @@
             android:id="@+id/editTextText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:ems="10"
-            android:inputType="text"
             android:hint="Miles from"
-            />
+            android:inputType="text" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="From"
-            />
+            android:text="From" />
 
         <LinearLayout
             android:id="@+id/myzipcodelayout"
@@ -210,44 +220,49 @@
                 android:id="@+id/radioButtonCurrentLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="50dp"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="0dp"
                 android:text="Current Location" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp"
                 android:layout_marginLeft="10dp"
-                >
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
                 <RadioButton
                     android:id="@+id/radioButton3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
                 <AutoCompleteTextView
                     android:id="@+id/editTextText4"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="zipcode"
+                    android:completionThreshold="4"
                     android:ems="10"
-                    android:inputType="text"
-                    android:completionThreshold="4"/>
+                    android:inputType="text" />
 
                 <!-- Add any other views you need in the same row -->
             </LinearLayout>
 
         </LinearLayout>
+
         <TextView
             android:id="@+id/warning"
             android:layout_width="356dp"
             android:layout_height="25dp"
             android:text="Please enter mandatory field"
             android:textColor="#FF0000"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText4"
-            tools:layout_editor_absoluteX="-1dp"
             android:visibility="gone"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextText4"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="-1dp" />
     </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>

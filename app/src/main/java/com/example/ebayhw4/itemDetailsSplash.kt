@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -42,21 +43,21 @@ class itemDetailsSplash : AppCompatActivity() {
     private lateinit var searchParamsJson: String
     private lateinit var shippingCost:String
     private var convertedPrice: Double = 0.0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_details_splash)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
+        var product = intent.getParcelableExtra<SearchResultItem>("product")
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         progressBar = findViewById(R.id.progressBar)
         titleTextView = findViewById(R.id.textView4)
         itemId = intent.getStringExtra("productId") ?: ""
         searchParamsJson = intent.getStringExtra("searchParams") ?: ""
         shippingCost = intent.getStringExtra("shippingCost").toString()
-        val facebookButton = findViewById<ImageButton>(R.id.facebookButton)
+        val position = intent.getIntExtra("position", RecyclerView.NO_POSITION)
 
+        val facebookButton = findViewById<ImageButton>(R.id.facebookButton)
         facebookButton.setOnClickListener {
             shareOnFacebook()
         }
@@ -66,14 +67,12 @@ class itemDetailsSplash : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
         searchParamsJson = intent.getStringExtra("searchParams") ?: ""
         tabLayout = findViewById(R.id.tabLayout)
-        val adapter = TabPagerAdapter(supportFragmentManager,itemId,searchParamsJson,shippingCost)
+        val adapter = TabPagerAdapter(supportFragmentManager,itemId,searchParamsJson,shippingCost,product,position)
         viewPager.adapter = adapter
-
         // Link the TabLayout to the ViewPager
         tabLayout.setupWithViewPager(viewPager)
         adapter.setupTabIcons()
         requestQueue = Volley.newRequestQueue(this)
-
         makeApiCall()
         Handler().postDelayed(
             {
@@ -86,16 +85,16 @@ class itemDetailsSplash : AppCompatActivity() {
 
     }
 
-    private inner class TabPagerAdapter(fm: FragmentManager, private val itemId: String, private  val searchParamsJson: String, private val shippingCost: String) : FragmentPagerAdapter(fm) {
+    private inner class TabPagerAdapter(fm: FragmentManager, private val itemId: String, private val searchParamsJson: String, private val shippingCost: String, private val product: SearchResultItem?, private val location: Int) : FragmentPagerAdapter(fm) {
         private val tabTitles = arrayOf("Product", "Shipping", "Photos", "Similar")
 
         private val tabIcons = intArrayOf(R.drawable.information_variant, R.drawable.truck_delivery, R.drawable.google, R.drawable.equal)
         override fun getItem(position: Int): Fragment {
             return when (position) {
-                0 -> ProductFragment.newInstance(itemId,shippingCost)
-                1 -> ShippingFragment.newInstance(itemId, searchParamsJson, shippingCost)
-                2 -> PhotosFragment.newInstance(title)
-                3 -> SimilarFragment.newInstance(itemId)
+                0 -> ProductFragment.newInstance(itemId,shippingCost, product)
+                1 -> ShippingFragment.newInstance(itemId, searchParamsJson, shippingCost,product,location)
+                2 -> PhotosFragment.newInstance(title,product)
+                3 -> SimilarFragment.newInstance(itemId,product)
                 else -> throw IllegalArgumentException("Invalid position: $position")
             }
         }
@@ -118,13 +117,13 @@ class itemDetailsSplash : AppCompatActivity() {
 
     private fun shareOnFacebook() {
         // Create a Facebook sharing URL
-            val hashtag = Uri.encode("#CSCI571Fall23AndroidApp")
-            val facebookUrl =
-                "https://www.facebook.com/sharer/sharer.php?u=$viewItemURL"+"&amp;src=sdkpreparse&hashtag=$hashtag"
+        val hashtag = Uri.encode("#CSCI571Fall23AndroidApp")
+        val facebookUrl =
+            "https://www.facebook.com/sharer/sharer.php?u=$viewItemURL"+"&amp;src=sdkpreparse&hashtag=$hashtag"
 
-            // Open the Facebook sharing page in a web browser
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(facebookUrl))
-            startActivity(intent)
+        // Open the Facebook sharing page in a web browser
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(facebookUrl))
+        startActivity(intent)
 
     }
     private fun makeApiCall() {
@@ -135,11 +134,11 @@ class itemDetailsSplash : AppCompatActivity() {
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
             Response.Listener { response ->
-                 item = response.getJSONObject("Item")
-                 viewItemURL = item.getString("ViewItemURLForNaturalSearch")
-                 title = item.getString("Title")
+                item = response.getJSONObject("Item")
+                viewItemURL = item.getString("ViewItemURLForNaturalSearch")
+                title = item.getString("Title")
 
-                 convertedCurrentPrice = item.getJSONObject("ConvertedCurrentPrice")
+                convertedCurrentPrice = item.getJSONObject("ConvertedCurrentPrice")
                 currency = convertedCurrentPrice.getString("CurrencyID")
                 convertedPrice = convertedCurrentPrice.getDouble("Value")
 
@@ -147,7 +146,7 @@ class itemDetailsSplash : AppCompatActivity() {
             },
             Response.ErrorListener { error ->
                 // Handle errors here
-             Log.e("error", error.toString())
+                Log.e("error", error.toString())
             }
         )
 

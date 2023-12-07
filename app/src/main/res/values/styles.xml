@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ShapeAppearanceOverlay.MyApp.FloatingActionButton" parent="">
+    <style name="ShapeAppearanceOverlay.MyApp.FloatingActionButton" parent="" >
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item> <!-- Adjust this percentage to control the roundness -->
+        <item name="backgroundTint">#673AB7</item>
     </style>
 
 </resources>

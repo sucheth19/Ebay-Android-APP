@@ -2,11 +2,17 @@ package com.example.ebayhw4
 
 import SearchResultsAdapter
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.core.app.NavUtils
 import androidx.core.app.TaskStackBuilder
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,7 +25,6 @@ import com.android.volley.toolbox.Volley
 import org.json.JSONException
 import org.json.JSONObject
 
-
 data class SearchResultItem(
     val itemId: String,
     val title: String,
@@ -28,7 +33,41 @@ data class SearchResultItem(
     val shippingPrice: String,
     val zipCode: String,
     val shippingCondition: String
-)
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: ""
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(itemId)
+        parcel.writeString(title)
+        parcel.writeString(galleryUrl)
+        parcel.writeString(price)
+        parcel.writeString(shippingPrice)
+        parcel.writeString(zipCode)
+        parcel.writeString(shippingCondition)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<SearchResultItem> {
+        override fun createFromParcel(parcel: Parcel): SearchResultItem {
+            return SearchResultItem(parcel)
+        }
+
+        override fun newArray(size: Int): Array<SearchResultItem?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
 
 class SearchResults : AppCompatActivity() {
     private var mRequestQueue: RequestQueue? = null
@@ -58,6 +97,7 @@ class SearchResults : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 2) // Set the number of columns
         adapter = SearchResultsAdapter(resultsList,searchParamsJson)
         recyclerView.adapter = adapter
+
 
 
 // String Request initialized
@@ -91,12 +131,20 @@ class SearchResults : AppCompatActivity() {
             count = countValue.toInt()
         } catch (e: JSONException) {
             e.printStackTrace()
+
         }
 
         try {
+            if(response.isNullOrEmpty()){
+                var ll = findViewById<LinearLayout>(R.id.linearLayout2)
+                ll.visibility = View.VISIBLE
+                val cardView = findViewById<CardView>(R.id.wishlistCardView)
+                cardView.visibility = View.VISIBLE
+                val tt = findViewById<TextView>(R.id.noItemsTextView)
+                tt.visibility = View.VISIBLE
+            }
             val jsonObject = JSONObject(response)
             val searchResultArray = jsonObject.getJSONArray("searchResult")
-            Log.d("searchResult",searchResultArray.toString())
             for (i in 0 until searchResultArray.length()) {
                 val searchResultItem = searchResultArray.getJSONObject(i)
 
@@ -107,7 +155,6 @@ class SearchResults : AppCompatActivity() {
                 // Iterate through the item array
                 for (j in 0 until itemArray.length()) {
                     val itemObject = itemArray.getJSONObject(j)
-                    Log.d(i.toString(),itemObject.toString())
                     val shippingCost = itemObject.getJSONArray("shippingInfo").getJSONObject(0)
                         .getJSONArray("shippingServiceCost").getJSONObject(0).getString("__value__") ?: "N/A"
                     val rawTitle = itemObject.getJSONArray("title").getString(0) ?: "N/A"
@@ -129,6 +176,7 @@ class SearchResults : AppCompatActivity() {
                         shippingCondition = condition,
 
                     )
+
                     WishlistManager.init(applicationContext)
 
                     resultsList.add(currentItem)
@@ -138,6 +186,8 @@ class SearchResults : AppCompatActivity() {
          catch (e: Exception) {
             e.printStackTrace()
             Log.e("JsonParsingError", "Error parsing JSON: ${e.message}")
+
+
         }
 
         adapter.notifyDataSetChanged()
